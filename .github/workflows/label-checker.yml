@@ -13,6 +13,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+  checks: write
+
 jobs:
   check_semver_labels:
     name: Check Semver labels
