@@ -15,7 +15,9 @@ concurrency:
 
 permissions:
   contents: read
-  statuses: write
+  pull-requests: read
+  issues: read
+  checks: write
 
 jobs:
   check_semver_labels:
