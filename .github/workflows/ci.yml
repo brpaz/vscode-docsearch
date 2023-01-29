@@ -53,6 +53,7 @@ jobs:
           path: reports/jest
 
   release:
+    name: Release
     needs: build-test
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
@@ -73,6 +74,8 @@ jobs:
         env:
           VERSION: ${{ github.event.release.tag_name }}
 
+      - run: git diff
+      - run: ls dist/
       - name: Upload release artifacts
         uses: actions/upload-release-asset@v1
         env:
@@ -83,7 +86,6 @@ jobs:
           asset_name: ${{ github.event.release.tag_name }}.vsix
           asset_content_type: application/zip
 
-      - run: ls
       #- name: Publish to Marketplace
       #  run: yarn publish --no-git-tag-version $VERSION
       #  env:
