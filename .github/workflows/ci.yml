@@ -1,0 +1,90 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+env:
+  CI: "true"
+
+jobs:
+  build-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install depdendencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint Code
+        run: yarn lint
+
+      - name: Compile
+        run: yarn compile
+
+      - name: Unit Tests
+        run: yarn test
+
+      - name: Upload Code coverage report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: Code Coverage report
+          path: reports/coverage/lcov-report
+
+      - name: Upload Jest Test Results report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: Test report
+          path: reports/jest
+
+  release:
+    needs: build-test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    steps:
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Package Extension
+        uses: yarn package  --no-git-tag-version $VERSION
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
+
+      - name: Upload release artifacts
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./dist/*.vsix
+          asset_name: ${{ github.event.release.tag_name }}.vsix
+          asset_content_type: application/zip
+
+      - run: ls
+      #- name: Publish to Marketplace
+      #  run: yarn publish --no-git-tag-version $VERSION
+      #  env:
+      #    VSCE_PATH: ${{ secrets.VSCE_TOKEN }}
