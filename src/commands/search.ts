@@ -10,11 +10,13 @@ class DocsetQuickPickItem implements vscode.QuickPickItem {
   label: string;
   id: string;
   detail: string;
+  description: string;
 
   constructor(docset: Docset) {
     this.id = docset.id;
     this.label = docset.name;
     this.detail = docset.description || '';
+    this.description = docset.provider.toString();
   }
 
   getDocsetId() {

@@ -74,17 +74,27 @@ jobs:
         env:
           VERSION: ${{ github.event.release.tag_name }}
 
-      - run: git diff
-      - run: ls dist/
-      - name: Upload release artifacts
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./dist/*.vsix
-          asset_name: ${{ github.event.release.tag_name }}.vsix
-          asset_content_type: application/zip
+          latest-version: ${{ github.event.release.name }}
+          release-notes: ${{ github.event.release.body }}
+
+      - name: Upload release binaries
+        uses: alexellis/upload-assets@0.4.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          asset_paths: '["./dist/*.vsix"]'
+
+      - name: Commit updated files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: "chore(release): bump version to $VERSION"
+          file_pattern: "package.json CHANGELOG.md"
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
 
       #- name: Publish to Marketplace
       #  run: yarn publish --no-git-tag-version $VERSION

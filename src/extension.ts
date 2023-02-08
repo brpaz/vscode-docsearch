@@ -6,7 +6,7 @@ import { DocSearch } from './services/docsearch';
 import { EXTENSION_NAME } from './constants';
 import { SearchProvider } from './services/providers/providers';
 import { AlgoliaSearchProvider } from './services/providers/algolia';
-import { get as getConfig } from './config/config';
+import { DocSetsLoader } from './docsets/loader';
 import { MkDocsSearchProvider } from './services/providers/mkdocs';
 import { MapperFactory } from './services/mapper/mapper.factory';
 
@@ -17,11 +17,13 @@ const searchProviders: SearchProvider[] = [new AlgoliaSearchProvider(new MapperF
 export function activate(context: vscode.ExtensionContext) {
   console.log(`Init extension: ${EXTENSION_NAME}`);
 
-  const extensionConfig = getConfig();
-  const docsets = extensionConfig.get('docsets', []);
+  const config = vscode.workspace.getConfiguration();
+  const docsetsLoader = new DocSetsLoader(config);
+
+  const docsets = docsetsLoader.load();
   const docsearchClient = new DocSearch(docsets, searchProviders);
 
-  const searchCommand = new SearchCommand(extensionConfig, docsearchClient);
+  const searchCommand = new SearchCommand(config, docsearchClient);
 
   context.subscriptions.push(searchCommand.register());
 }

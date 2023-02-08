@@ -666,6 +666,17 @@ const defaultDocsets = [
       indexUrl: 'https://argo-cd.readthedocs.io/en/stable/search/search_index.json',
     },
   },
+  {
+    id: 'postgres',
+    name: 'PostgreSQL',
+    description: 'The world’s most advanced open source database',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://www.postgresql.org/docs/',
+    searchConfig: {
+      slug: 'postgresql~14',
+    },
+  },
 ];
 
 export default defaultDocsets;

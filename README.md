@@ -1,6 +1,6 @@
 # VSCode DocSearch extension
 
-> VS Code Extension that allows to Search on documentation sites powered by [Algolia DocSearch](https://docsearch.algolia.com/) or [MkDocs](https://www.mkdocs.org/), directly from VSCode.
+> VS Code Extension that allows to Search multiple documentation sites directly from VSCode.
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/brpaz/vscode-docsearch/CI?style=for-the-badge)]()
@@ -10,6 +10,13 @@
 ## Demo
 
 TODO
+
+## Supported Providers
+
+- [Algolia Docsearch](https://docsearch.algolia.com/)
+- [Mkdocs](https://www.mkdocs.org/)
+- [DevDocs](https://devdocs.io/)
+
 
 ## Included Documentation
 

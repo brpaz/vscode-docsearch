@@ -1,6 +1,8 @@
 export enum DocsetProvider {
   Algolia = 'algolia',
   MkDocs = 'mkdocs',
+  Website = 'website',
+  DevDocs = 'devdocs',
 }
 
 export interface AlgoliaProviderConfig {
@@ -14,6 +16,14 @@ export interface MkDocsProviderConfig {
   indexUrl: string;
 }
 
+export interface WebsiteConfig {
+  url: string;
+}
+
+export interface DevDocsConfig {
+  slug: string;
+}
+
 export interface Docset {
   id: string;
   name: string;
@@ -21,5 +31,5 @@ export interface Docset {
   siteUrl: string;
   enabled: boolean;
   provider: DocsetProvider;
-  searchConfig: AlgoliaProviderConfig | MkDocsProviderConfig;
+  searchConfig: AlgoliaProviderConfig | MkDocsProviderConfig | DevDocsConfig | WebsiteConfig;
 }
