@@ -677,6 +677,88 @@ const defaultDocsets = [
       slug: 'postgresql~14',
     },
   },
+  {
+    id: 'javascript',
+    name: 'Javascript',
+    description: 'A scripting or programming language that allows you to implement complex features on web pages',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+    searchConfig: {
+      slug: 'javascript',
+    },
+  },
+  {
+    id: 'kubernetes',
+    name: 'Kubernetes',
+    description:
+      'Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://kubernetes.io/docs',
+    searchConfig: {
+      slug: 'kubernetes',
+    },
+  },
+  {
+    id: 'css',
+    name: 'CSS',
+    description:
+      'Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
+    searchConfig: {
+      slug: 'css',
+    },
+  },
+  {
+    id: 'golang',
+    name: 'Golang',
+    description:
+      'Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://golang.org/doc/',
+    searchConfig: {
+      slug: 'go',
+    },
+  },
+  {
+    id: 'git',
+    name: 'Git',
+    description:
+      'Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://git-scm.com/doc',
+    searchConfig: {
+      slug: 'git',
+    },
+  },
+  {
+    id: 'http',
+    name: 'HTTP',
+    description:
+      'The Hypertext Transfer Protocol (HTTP) is an application protocol for distributed, collaborative, hypermedia information systems.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://developer.mozilla.org/en-US/docs/Web/HTTP',
+    searchConfig: {
+      slug: 'http',
+    },
+  },
+  {
+    id: 'copier',
+    name: 'Copier',
+    description: 'A modern templating system for Python.',
+    enabled: true,
+    provider: DocsetProvider.MkDocs,
+    siteUrl: 'https://copier.readthedocs.io/en/stable',
+    searchConfig: {
+      indexUrl: 'https://copier.readthedocs.io/en/stable/search/search_index.json',
+    },
+  },
 ];
 
 export default defaultDocsets;

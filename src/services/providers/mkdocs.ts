@@ -1,6 +1,7 @@
-import { Docset, DocsetProvider, MkDocsProviderConfig } from '../../models';
+import { DocsetProvider, MkDocsProviderConfig } from '../../models';
+import { Docset } from '../../docsets/docset';
 import { SearchProvider, SearchResult } from './providers';
-import fetch from 'node-fetch';
+import { fetchBuilder, FileSystemCache } from 'node-fetch-cache';
 
 interface Doc {
   location: string;
@@ -12,10 +13,15 @@ interface Doc {
  * Class for searching documentation in websites powered by MkDocs.
  */
 export class MkDocsSearchProvider implements SearchProvider {
+  private fetch: typeof fetchBuilder;
+
+  constructor(cacheDir: string) {
+    this.fetch = fetchBuilder.withCache(new FileSystemCache({ cacheDirectory: cacheDir, ttl: 86400 }));
+  }
+
   async search(docset: Docset, query: string): Promise<SearchResult[]> {
     const searchConfig = docset.searchConfig as MkDocsProviderConfig;
 
-    // TODO cache index to avoid fetching it every time.
     const indexedDocs = await this.fetchIndex(searchConfig.indexUrl);
 
     return indexedDocs
@@ -35,7 +41,7 @@ export class MkDocsSearchProvider implements SearchProvider {
   }
 
   private async fetchIndex(indexUrl: string): Promise<Doc[]> {
-    const response = await fetch(indexUrl, {
+    const response = await this.fetch(indexUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,9 +49,13 @@ export class MkDocsSearchProvider implements SearchProvider {
       },
     });
 
+    if (!response.ok) {
+      await response.ejectFromCache();
+      throw new Error(`Error to fetch documentation. Response: ${response.status} ${response.statusText}`);
+    }
     const data = await response.json();
 
-    if (data.docs.length > 0) {
+    if ('docs' in data && data.docs.length > 0) {
       return data.docs;
     }
 

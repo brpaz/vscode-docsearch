@@ -1,4 +1,5 @@
-import { Docset, DocsetProvider, AlgoliaProviderConfig } from '../../models';
+import { DocsetProvider, AlgoliaProviderConfig } from '../../models';
+import { Docset } from '../../docsets/docset';
 import { SearchProvider, SearchResult } from './providers';
 import fetch, { Response } from 'node-fetch';
 import { MapperFactory } from '../mapper/mapper.factory';

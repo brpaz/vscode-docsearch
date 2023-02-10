@@ -1,4 +1,4 @@
-import { Docset } from '../../models';
+import { Docset } from '../../docsets/docset';
 
 export interface SearchResult {
   title: string;

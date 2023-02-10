@@ -1,4 +1,5 @@
-import { AlgoliaProviderConfig, Docset, DocsetProvider } from '../../models';
+import { AlgoliaProviderConfig, DocsetProvider } from '../../models';
+import { Docset } from '../../docsets/docset';
 import { TerraformMapper } from './terraform.mapper';
 
 describe('TerraformMapper', () => {

@@ -1,4 +1,5 @@
-import { AlgoliaProviderConfig, Docset, DocsetProvider } from '../../models';
+import { AlgoliaProviderConfig, DocsetProvider } from '../../models';
+import { Docset } from '../../docsets/docset';
 import { DefaultMapper } from './default.mapper';
 
 describe('DefaultMapper', () => {

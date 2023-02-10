@@ -1,4 +1,4 @@
-import { Docset } from '../../models';
+import { Docset } from '../../docsets/docset';
 import { SearchResult } from '../providers/providers';
 
 export interface ResultMapper {

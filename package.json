@@ -444,6 +444,8 @@
     "@types/jest": "^29.4.0",
     "@types/node": "^16.18.11",
     "@types/node-fetch": "^2.6.2",
+    "@types/node-fetch-cache": "^3.0.0",
+    "@types/tmp": "^0.2.3",
     "@types/vscode": "^1.52.0",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
@@ -483,6 +485,7 @@
     "titleTemplate": "{title}"
   },
   "dependencies": {
-    "node-fetch": "2"
+    "node-fetch": "2",
+    "node-fetch-cache": "^3.0.5"
   }
 }

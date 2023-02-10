@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Docset } from '../models';
+import { Docset } from './docset';
 import defaultDocsets from './defaultDocsets';
 import { CONFIG_DEFAULT_DOCSETS } from '../constants';
 

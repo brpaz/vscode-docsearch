@@ -1,6 +1,8 @@
-import { MkDocsProviderConfig, Docset, DocsetProvider } from '../../models';
+import { MkDocsProviderConfig, DocsetProvider } from '../../models';
+import { Docset } from '../../docsets/docset';
 import { MkDocsSearchProvider } from './mkdocs';
 import * as nock from 'nock';
+import * as tmp from 'tmp';
 
 const mockResponse = {
   docs: [
@@ -14,9 +16,14 @@ const mockResponse = {
 
 describe('MkDocs Provider', () => {
   let provider: MkDocsSearchProvider;
+
+  let cacheDir: tmp.DirResult;
+
   beforeEach(() => {
-    provider = new MkDocsSearchProvider();
+    cacheDir = tmp.dirSync({ unsafeCleanup: true });
+    provider = new MkDocsSearchProvider(cacheDir.name);
   });
+
   it('return the correct provider key', () => {
     expect(provider.getKey()).toEqual('mkdocs');
   });
@@ -52,5 +59,6 @@ describe('MkDocs Provider', () => {
 
   afterEach(() => {
     nock.cleanAll();
+    cacheDir.removeCallback();
   });
 });

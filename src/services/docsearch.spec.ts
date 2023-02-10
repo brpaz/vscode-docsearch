@@ -1,6 +1,7 @@
 import { DocSearch } from './docsearch';
 import { SearchProvider } from './providers/providers';
-import { AlgoliaProviderConfig, Docset, DocsetProvider } from '../models';
+import { AlgoliaProviderConfig, DocsetProvider } from '../models';
+import { Docset } from '../docsets/docset';
 
 describe('DocSearch service', () => {
   let docSearch: DocSearch;

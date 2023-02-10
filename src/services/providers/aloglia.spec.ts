@@ -1,4 +1,5 @@
-import { AlgoliaProviderConfig, Docset } from '../../models';
+import { AlgoliaProviderConfig } from '../../models';
+import { Docset } from '../../docsets/docset';
 import { AlgoliaSearchProvider } from './algolia';
 import * as nock from 'nock';
 import { MapperFactory } from '../mapper/mapper.factory';
