@@ -2,10 +2,11 @@
 
 > An all-in-one [VSCode](http://code.visualstudio.com) extension for searching multiple documentation sources, without leaving your editor.
 
+
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brpaz/vscode-docsearch/ci.yml?style=for-the-badge)](https://github.com/brpaz/vscode-docsearch/actions/workflows/ci.yml)
 [![Code Coverage](https://img.shields.io/codecov/c/github/brpaz/vscode-docsearch?style=for-the-badge)](https://app.codecov.io/gh/brpaz/vscode-docsearch)
-[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/brpaz.vscode-docsearch?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=brpaz.docsearch)
-[![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/b?style=for-the-badge)](https://img.shields.io/visual-studio-marketplace/i/brpaz.docsearch?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=brpaz.vscode-docsearch)
+[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/brpaz.vscode-docsearch?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=brpaz.vscode-docsearch)
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/brpaz.vscode-docsearch?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=brpaz.vscode-docsearch)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 ## Motivation
@@ -32,7 +33,6 @@ There is no scrapping or indexing. It´s simply an HTTP request, to existing sea
 ### Included Documentation
 
 By default, this extension includes the following documnetation:
-
 
 ### Docsearch
 
@@ -125,6 +125,10 @@ If you want to disable a default documnetation site, provided by the extension:
 
 This example will disable React documnetation. Press `CTRL+Space` insde the object, to get autocomplete for the available documentations.
 
+
+### Add your own Documentation.
+
+TODO
 
 
 ## Contributing
