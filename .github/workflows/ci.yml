@@ -45,6 +45,12 @@ jobs:
           name: Code Coverage report
           path: reports/coverage/lcov-report
 
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./reports/coverage/lcov.info
+
       - name: Upload Jest Test Results report
         uses: actions/upload-artifact@v3
         if: always()
@@ -57,6 +63,9 @@ jobs:
     needs: build-test
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
+    permissions:
+      contents: write
+      packages: write
     steps:
       - name: Setup NodeJS
         uses: actions/setup-node@v3
@@ -74,12 +83,13 @@ jobs:
         env:
           VERSION: ${{ github.event.release.tag_name }}
 
+      - run: ls -la ./dist
       - name: Upload release binaries
         uses: alexellis/upload-assets@0.4.0
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          asset_paths: '["./dist/*.vsix"]'
+          asset_paths: '["./dist/*"]'
 
       - name: Publish to Marketplace
         run: yarn publish --no-git-tag-version $VERSION
