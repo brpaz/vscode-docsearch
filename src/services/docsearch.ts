@@ -1,4 +1,4 @@
-import { Docset } from '../models';
+import { Docset } from '../docsets/docset';
 import { SearchProvider, SearchResult } from './providers/providers';
 
 /**
@@ -21,7 +21,7 @@ export class DocSearch {
 
   // Returns a list of enabled Docsets
   getDocsets(): Docset[] {
-    return this.docsets.filter((docset) => docset.enabled).sort((a, b) => a.name.localeCompare(b.name));
+    return this.docsets.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   getProviders(): SearchProvider[] {
@@ -29,12 +29,12 @@ export class DocSearch {
   }
 
   async search(docsetId: string, query: string): Promise<SearchResult[]> {
-    console.log('Searching for ' + query + ' in ' + docsetId + '');
+    console.log(`Searching for ${query} in ${docsetId}`);
 
     const docset = this.fincDocsetById(docsetId);
 
     if (!docset) {
-      throw new Error(`Docset ${docsetId} not found`);
+      throw new Error(`Docset with id "${docsetId}" not found`);
     }
 
     const provider = this.providers.find((p) => p.getKey() === docset.provider);
@@ -43,8 +43,6 @@ export class DocSearch {
       throw new Error(`No provider found for ${docset.provider}`);
     }
 
-    const results = await provider.search(docset, query);
-
-    return results;
+    return await provider.search(docset, query);
   }
 }

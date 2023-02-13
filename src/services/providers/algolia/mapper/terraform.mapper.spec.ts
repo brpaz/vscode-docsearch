@@ -1,5 +1,7 @@
-import { AlgoliaProviderConfig, Docset, DocsetProvider } from '../../models';
-import { TerraformMapper } from './terraform.mapper';
+import { AlgoliaProviderConfig } from '..';
+import { Docset } from '../../../../docsets/docset';
+import { DocsetProvider } from '../../providers';
+import TerraformMapper from './terraform.mapper';
 
 describe('TerraformMapper', () => {
   let mapper: TerraformMapper;

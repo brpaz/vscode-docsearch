@@ -1,5 +1,5 @@
-import { Docset } from '../../models';
-import { SearchResult } from '../providers/providers';
+import { Docset } from '../../../../docsets/docset';
+import { SearchResult } from '../../providers';
 import { ResultMapper } from './mapper';
 
 interface VercelResult {
@@ -13,7 +13,7 @@ interface VercelHit {
   tags?: Array<string>;
 }
 
-export class VercelMapper implements ResultMapper {
+export default class VercelMapper implements ResultMapper {
   map(docset: Docset, data: unknown): SearchResult[] {
     const result = data as VercelResult;
 

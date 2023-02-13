@@ -1,5 +1,7 @@
-import { AlgoliaProviderConfig, Docset, DocsetProvider } from '../../models';
-import { PrismaMapper } from './prisma.mapper';
+import { AlgoliaProviderConfig } from '..';
+import { Docset } from '../../../../docsets/docset';
+import { DocsetProvider } from '../../providers';
+import PrismaMapper from './prisma.mapper';
 
 describe('PrismaMapper', () => {
   let mapper: PrismaMapper;

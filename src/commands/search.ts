@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { DocSearch } from '../services/docsearch';
-import { Docset } from '../models';
+import { Docset } from '../docsets/docset';
 import { SearchResult } from '../services/providers/providers';
 import { SEARCH_COMMAND_ID } from './commands';
 
@@ -10,11 +10,13 @@ class DocsetQuickPickItem implements vscode.QuickPickItem {
   label: string;
   id: string;
   detail: string;
+  description: string;
 
   constructor(docset: Docset) {
     this.id = docset.id;
     this.label = docset.name;
     this.detail = docset.description || '';
+    this.description = docset.provider.toString();
   }
 
   getDocsetId() {
@@ -42,7 +44,7 @@ class SearchResultQuickPickItem implements vscode.QuickPickItem {
  * Search command.
  * This command is responsible for providing the search UI for the user.
  */
-export class SearchCommand {
+export default class SearchCommand {
   constructor(private config: vscode.WorkspaceConfiguration, private docsearch: DocSearch) {}
 
   execute() {
@@ -50,56 +52,39 @@ export class SearchCommand {
     this.showDocsetsQuickPick(docsets);
   }
 
-  showDocsetsQuickPick(docsets: Docset[]) {
+  private showDocsetsQuickPick(docsets: Docset[]) {
     const quickPick = vscode.window.createQuickPick();
 
     quickPick.placeholder = 'Select the documentation you want to search';
     quickPick.items = docsets.map((docset) => new DocsetQuickPickItem(docset));
+
     quickPick.onDidChangeSelection((selection) => this.handleDocsetSelection(selection[0] as DocsetQuickPickItem));
     quickPick.show();
   }
 
-  showSearchResultsQuickPick(results: SearchResult[], query: string, selection: DocsetQuickPickItem) {
+  private onSearchItemSelected(selection: readonly vscode.QuickPickItem[]) {
+    const selectedItem = selection[0] as SearchResultQuickPickItem;
+    const docUrl = selectedItem.url;
+
+    if (!docUrl) {
+      return;
+    }
+
+    vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(docUrl));
+  }
+
+  private showSearchResultsQuickPick(results: SearchResult[], query: string, selection: DocsetQuickPickItem) {
     const resultsPick = vscode.window.createQuickPick();
     resultsPick.placeholder = `Results for ${query} in ${selection.getDocsetName()}`;
 
     resultsPick.items = results.slice(0, MAX_LIST_RESULTS).map((result) => new SearchResultQuickPickItem(result));
 
-    resultsPick.onDidChangeSelection((selection) => {
-      const selectedItem = selection[0] as SearchResultQuickPickItem;
-      const docUrl = selectedItem.url;
-
-      if (!docUrl) {
-        return;
-      }
-
-      vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(docUrl));
-
-      // Most of documentation sites don´t allow to be opened in an iframe.
-      // Maybe in the future VSCode will allow to open a webview from an external URL,
-      // without requiring an iframe.
-      /**if (this.config.get('openInBrowser', false)) {
-        vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(docUrl));
-      } else {
-        this.showWebView(selectedItem.label, docUrl);
-      }*/
-    });
+    resultsPick.onDidChangeSelection((selection) => this.onSearchItemSelected(selection));
 
     resultsPick.show();
   }
 
-  showWebView(title: string, url: string) {
-    const panel = vscode.window.createWebviewPanel(url, `${title} Documentation`, vscode.ViewColumn.Beside, {
-      enableScripts: true,
-      retainContextWhenHidden: true,
-      enableFindWidget: true,
-      enableForms: true,
-    });
-
-    panel.webview.html = `<iframe style="height: 100vh; width: 100%;" src="${url}"></iframe>`;
-  }
-
-  async handleDocsetSelection(selection: DocsetQuickPickItem) {
+  private async handleDocsetSelection(selection: DocsetQuickPickItem) {
     const query = await vscode.window.showInputBox({
       prompt: `Searching ${selection.getDocsetName()} documentation`,
       placeHolder: `Start typing your search query`,
@@ -121,6 +106,7 @@ export class SearchCommand {
       } catch (e: unknown) {
         const error = e as Error;
 
+        console.log(e);
         vscode.window.showErrorMessage(`Error searching ${selection.getDocsetName()}: ${error.message}`);
         return;
       }

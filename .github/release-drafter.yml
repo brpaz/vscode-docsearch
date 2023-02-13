@@ -1,23 +1,26 @@
 name-template: "$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
 categories:
+  - title: "Breaking Changes"
+    labels:
+      - breaking
   - title: 🚀 Features
     labels:
       - feature
       - enhancement
   - title: 🐛 Bug Fixes
     labels:
-      - fix
       - bug
-  - title: ⚠️ Changes
-    labels:
-      - chore
   - title: ⛔️ Deprecated
     labels:
       - deprecated
-  - title: 🔐 Security
+  - title: 🔐 Security updates
     labels:
       - security
+  - title: ⚠️ Maintenance
+    labels:
+      - chore
+      - maintenance
   - title: 📄 Documentation
     labels:
       - docs
@@ -34,17 +37,23 @@ exclude-labels:
 version-resolver:
   major:
     labels:
-      - "major"
+      - "breaking"
   minor:
     labels:
-      - "minor"
+      - feature
+      - enhancement
   patch:
     labels:
-      - "patch"
-  default: patch
+      - "bug"
+      - "maintenance"
+      - "chore"
+      - "dependencies"
+      - "deps"
+      - "security"
+      - "docs"
 template: |
-  ## Changes
-
-  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+  # What's Changed
 
   $CHANGES
+
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION

@@ -1,5 +1,7 @@
-import { AlgoliaProviderConfig, DocsetProvider, Docset } from '../../models';
-import { VercelMapper } from './vercel.mapper';
+import { AlgoliaProviderConfig } from '..';
+import { Docset } from '../../../../docsets/docset';
+import { DocsetProvider } from '../../providers';
+import VercelMapper from './vercel.mapper';
 
 describe('vercelMapper', () => {
   let vercelMapper: VercelMapper;

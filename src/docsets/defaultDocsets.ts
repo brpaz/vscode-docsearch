@@ -1,6 +1,7 @@
-import { DocsetProvider } from '../models';
+import { DocsetProvider } from '../services/providers/providers';
+import { Docset } from './docset';
 
-const defaultDocsets = [
+const defaultDocsets: Docset[] = [
   {
     id: 'react',
     name: 'React',
@@ -424,8 +425,8 @@ const defaultDocsets = [
     provider: DocsetProvider.Algolia,
     siteUrl: 'https://www.prisma.io/docs',
     searchConfig: {
-      indexName: 'prisma2-docs',
-      apiKey: 'c2c66340c04baad40a878dc3a72fa273',
+      indexName: 'docs-prod',
+      apiKey: 'd8ae0173fc0d9170b085840d0c95f389',
       appId: 'MK4LNFW4EO',
     },
   },
@@ -664,6 +665,125 @@ const defaultDocsets = [
     siteUrl: 'https://argo-cd.readthedocs.io/en/stable',
     searchConfig: {
       indexUrl: 'https://argo-cd.readthedocs.io/en/stable/search/search_index.json',
+    },
+  },
+  {
+    id: 'postgres',
+    name: 'PostgreSQL',
+    description: 'The world’s most advanced open source database',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://www.postgresql.org/docs/',
+    searchConfig: {
+      slug: 'postgresql~14',
+    },
+  },
+  {
+    id: 'javascript',
+    name: 'Javascript',
+    description: 'A scripting or programming language that allows you to implement complex features on web pages',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+    searchConfig: {
+      slug: 'javascript',
+    },
+  },
+  {
+    id: 'kubernetes',
+    name: 'Kubernetes',
+    description:
+      'Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://kubernetes.io/docs',
+    searchConfig: {
+      slug: 'kubernetes',
+    },
+  },
+  {
+    id: 'css',
+    name: 'CSS',
+    description:
+      'Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
+    searchConfig: {
+      slug: 'css',
+    },
+  },
+  {
+    id: 'golang',
+    name: 'Golang',
+    description:
+      'Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://golang.org/doc/',
+    searchConfig: {
+      slug: 'go',
+    },
+  },
+  {
+    id: 'git',
+    name: 'Git',
+    description:
+      'Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://git-scm.com/doc',
+    searchConfig: {
+      slug: 'git',
+    },
+  },
+  {
+    id: 'http',
+    name: 'HTTP',
+    description:
+      'The Hypertext Transfer Protocol (HTTP) is an application protocol for distributed, collaborative, hypermedia information systems.',
+    enabled: true,
+    provider: DocsetProvider.DevDocs,
+    siteUrl: 'https://developer.mozilla.org/en-US/docs/Web/HTTP',
+    searchConfig: {
+      slug: 'http',
+    },
+  },
+  {
+    id: 'copier',
+    name: 'Copier',
+    description: 'A modern templating system for Python.',
+    enabled: true,
+    provider: DocsetProvider.MkDocs,
+    siteUrl: 'https://copier.readthedocs.io/en/stable',
+    searchConfig: {
+      indexUrl: 'https://copier.readthedocs.io/en/stable/search/search_index.json',
+    },
+  },
+  {
+    id: 'trpc',
+    name: 'TRPC',
+    siteUrl: 'https://trpc.io',
+    description: 'trpc is a fullstack RPC framework for React and Next.js',
+    provider: DocsetProvider.Algolia,
+    enabled: true,
+    searchConfig: {
+      appId: 'BTGPSR4MOE',
+      indexName: 'trpc',
+      apiKey: 'ed8b3896f8e3e2b421e4c38834b915a8',
+    },
+  },
+  {
+    id: 'nextjs',
+    name: 'Next.js',
+    siteUrl: 'https://nextjs.org/docs',
+    description: 'The React Framework',
+    provider: DocsetProvider.Algolia,
+    enabled: true,
+    searchConfig: {
+      appId: 'NNTAHQI9C5',
+      indexName: 'nextjs_docs',
+      apiKey: '2c5d997944f03fde36ebdbe2f1759ea2',
     },
   },
 ];

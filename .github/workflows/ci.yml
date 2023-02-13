@@ -74,19 +74,32 @@ jobs:
         env:
           VERSION: ${{ github.event.release.tag_name }}
 
-      - run: git diff
-      - run: ls dist/
-      - name: Upload release artifacts
-        uses: actions/upload-release-asset@v1
+      - name: Upload release binaries
+        uses: alexellis/upload-assets@0.4.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./dist/*.vsix
-          asset_name: ${{ github.event.release.tag_name }}.vsix
-          asset_content_type: application/zip
+          asset_paths: '["./dist/*.vsix"]'
 
-      #- name: Publish to Marketplace
-      #  run: yarn publish --no-git-tag-version $VERSION
-      #  env:
-      #    VSCE_PATH: ${{ secrets.VSCE_TOKEN }}
+      - name: Publish to Marketplace
+        run: yarn publish --no-git-tag-version $VERSION
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ github.event.release.name }}
+          release-notes: ${{ github.event.release.body }}
+
+      - name: Set release commit message
+        id: release_commit_message
+        run: |
+          echo "commit_message=chore(release): bump version ${RELEASE_TAG}" >> $GITHUB_OUTPUT
+
+      - name: Commit updated Changelog and Package.json
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: "${{ steps.release_commit_message.outputs.commit_message }}"
+          file_pattern: "CHANGELOG.md package.json"
