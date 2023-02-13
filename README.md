@@ -2,10 +2,10 @@
 
 > An all-in-one [VSCode](http://code.visualstudio.com) extension for searching multiple documentation sources, without leaving your editor.
 
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/brpaz/vscode-docsearch/CI?style=for-the-badge)]()
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brpaz/vscode-docsearch/ci.yml?style=for-the-badge)](https://github.com/brpaz/vscode-docsearch/actions/workflows/ci.yml)
 [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/brpaz.vscode-docsearch?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=brpaz.docsearch)
 [![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/b?style=for-the-badge)](https://img.shields.io/visual-studio-marketplace/i/brpaz.docsearch?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=brpaz.vscode-docsearch)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 ## Motivation
 
