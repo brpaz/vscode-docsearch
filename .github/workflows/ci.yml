@@ -66,6 +66,8 @@ jobs:
     permissions:
       contents: write
       packages: write
+    env:
+      VERSION: ${{ github.event.release.tag_name }}
     steps:
       - name: Setup NodeJS
         uses: actions/setup-node@v3
@@ -83,10 +85,7 @@ jobs:
 
       - name: Package Extension
         run: yarn package  --no-git-tag-version $VERSION
-        env:
-          VERSION: ${{ github.event.release.tag_name }}
 
-      - run: ls -la ./dist
       - name: Upload release binaries
         uses: alexellis/upload-assets@0.4.0
         env:
@@ -108,7 +107,7 @@ jobs:
       - name: Set release commit message
         id: release_commit_message
         run: |
-          echo "commit_message=chore(release): bump version ${RELEASE_TAG}" >> $GITHUB_OUTPUT
+          echo "commit_message=chore(release): bump version ${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Commit updated Changelog and Package.json
         uses: stefanzweifel/git-auto-commit-action@v4
