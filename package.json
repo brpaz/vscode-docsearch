@@ -437,7 +437,6 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "vscode:prepublish": "yarn run compile",
     "compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
     "lint:fix": "eslint src --ext ts --fix",

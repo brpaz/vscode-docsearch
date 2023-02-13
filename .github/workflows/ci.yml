@@ -78,6 +78,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Compile
+        run: yarn compile
+
       - name: Package Extension
         run: yarn package  --no-git-tag-version $VERSION
         env:
@@ -94,7 +97,7 @@ jobs:
       - name: Publish to Marketplace
         run: yarn vsce:publish
         env:
-          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+          VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
 
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
