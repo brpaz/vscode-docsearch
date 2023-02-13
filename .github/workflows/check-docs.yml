@@ -1,4 +1,4 @@
-name: Validate Docs
+name: Check Broken Docs
 on:
   schedule:
     - cron: 0 9 * * 6 # Every saturday at 9am
@@ -19,7 +19,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Run Docs Validation
-        run: yarn validate-docs
+        run: yarn docs:check
 
       - name: Create Issue
         if: failure()

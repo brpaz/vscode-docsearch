@@ -1,8 +1,7 @@
-import { AlgoliaProviderConfig } from '../../models';
-import { Docset } from '../../docsets/docset';
-import { AlgoliaSearchProvider } from './algolia';
+import { Docset } from '../../../docsets/docset';
+import { AlgoliaProviderConfig, AlgoliaSearchProvider } from './index';
+import MapperFactory from './mapper/factory';
 import * as nock from 'nock';
-import { MapperFactory } from '../mapper/mapper.factory';
 
 const mockAlgoliaResponse = {
   hits: [
@@ -21,7 +20,7 @@ const mockAlgoliaResponse = {
       },
     },
   ],
-} as any;
+};
 
 describe('Algolia Provider', () => {
   let provider: AlgoliaSearchProvider;

@@ -1,6 +1,7 @@
-import { AlgoliaProviderConfig, DocsetProvider } from '../../models';
-import { Docset } from '../../docsets/docset';
-import { DefaultMapper } from './default.mapper';
+import { AlgoliaProviderConfig } from '..';
+import { Docset } from '../../../../docsets/docset';
+import { DocsetProvider } from '../../providers';
+import DefaultMapper from './default.mapper';
 
 describe('DefaultMapper', () => {
   let mapper: DefaultMapper;

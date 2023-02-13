@@ -57,8 +57,20 @@ export default class SearchCommand {
 
     quickPick.placeholder = 'Select the documentation you want to search';
     quickPick.items = docsets.map((docset) => new DocsetQuickPickItem(docset));
+
     quickPick.onDidChangeSelection((selection) => this.handleDocsetSelection(selection[0] as DocsetQuickPickItem));
     quickPick.show();
+  }
+
+  private onSearchItemSelected(selection: readonly vscode.QuickPickItem[]) {
+    const selectedItem = selection[0] as SearchResultQuickPickItem;
+    const docUrl = selectedItem.url;
+
+    if (!docUrl) {
+      return;
+    }
+
+    vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(docUrl));
   }
 
   private showSearchResultsQuickPick(results: SearchResult[], query: string, selection: DocsetQuickPickItem) {
@@ -67,16 +79,7 @@ export default class SearchCommand {
 
     resultsPick.items = results.slice(0, MAX_LIST_RESULTS).map((result) => new SearchResultQuickPickItem(result));
 
-    resultsPick.onDidChangeSelection((selection) => {
-      const selectedItem = selection[0] as SearchResultQuickPickItem;
-      const docUrl = selectedItem.url;
-
-      if (!docUrl) {
-        return;
-      }
-
-      vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(docUrl));
-    });
+    resultsPick.onDidChangeSelection((selection) => this.onSearchItemSelected(selection));
 
     resultsPick.show();
   }

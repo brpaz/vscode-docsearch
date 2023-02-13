@@ -1,8 +1,8 @@
-import { MkDocsProviderConfig, DocsetProvider } from '../../models';
 import { Docset } from '../../docsets/docset';
-import { MkDocsSearchProvider } from './mkdocs';
+import { MkDocsProviderConfig, MkDocsSearchProvider } from './mkdocs';
 import * as nock from 'nock';
 import * as tmp from 'tmp';
+import { DocsetProvider } from './providers';
 
 const mockResponse = {
   docs: [

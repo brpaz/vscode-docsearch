@@ -1,5 +1,5 @@
-import { Docset } from '../../docsets/docset';
-import { SearchResult } from '../providers/providers';
+import { Docset } from '../../../../docsets/docset';
+import { SearchResult } from '../../providers';
 import { ResultMapper } from './mapper';
 
 interface TerraformResult {
@@ -13,7 +13,7 @@ interface TerraformHit {
   tags?: Array<string>;
 }
 
-export class TerraformMapper implements ResultMapper {
+export default class TerraformMapper implements ResultMapper {
   map(docset: Docset, data: unknown): SearchResult[] {
     const result = data as TerraformResult;
 

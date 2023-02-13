@@ -1,5 +1,5 @@
-import { Docset } from '../../docsets/docset';
-import { SearchResult } from '../providers/providers';
+import { Docset } from '../../../../docsets/docset';
+import { SearchResult } from '../../providers';
 import { ResultMapper } from './mapper';
 
 interface WebDevResponse {
@@ -11,7 +11,7 @@ interface WebDevHit {
   title: string;
 }
 
-export class WebDevMapper implements ResultMapper {
+export default class WebDevMapper implements ResultMapper {
   map(docset: Docset, data: unknown): SearchResult[] {
     const result = data as WebDevResponse;
 

@@ -1,7 +1,6 @@
-import { DevDocsProviderConfig, DocsetProvider } from '../../models';
-import { DevDocsProvider } from './devdocs';
+import { DevDocsProvider, DevDocsProviderConfig } from './devdocs';
 import { Docset } from '../../docsets/docset';
-import { SearchResult } from './providers';
+import { DocsetProvider, SearchResult } from './providers';
 import * as nock from 'nock';
 import * as tmp from 'tmp';
 
@@ -16,10 +15,6 @@ describe('DevDocs Provider', () => {
   });
   it('return the correct provider key', () => {
     expect(provider.getKey()).toEqual(DocsetProvider.DevDocs);
-  });
-
-  it('should return a list of search results', async () => {
-    expect(true).toBeTruthy();
   });
 
   describe('search', () => {

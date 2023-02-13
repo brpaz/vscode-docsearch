@@ -1,12 +1,15 @@
-import { DocsetProvider, MkDocsProviderConfig } from '../../models';
 import { Docset } from '../../docsets/docset';
-import { SearchProvider, SearchResult } from './providers';
+import { DocsetProvider, SearchProvider, SearchResult } from './providers';
 import { fetchBuilder, FileSystemCache } from 'node-fetch-cache';
 
 interface Doc {
   location: string;
   title: string;
   text: string;
+}
+
+export interface MkDocsProviderConfig {
+  indexUrl: string;
 }
 
 /**

@@ -29,7 +29,7 @@ export class DocSearch {
   }
 
   async search(docsetId: string, query: string): Promise<SearchResult[]> {
-    console.log('Searching for ${query} in ${docsetId}');
+    console.log(`Searching for ${query} in ${docsetId}`);
 
     const docset = this.fincDocsetById(docsetId);
 

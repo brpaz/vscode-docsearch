@@ -7,6 +7,12 @@ export interface SearchResult {
   category: string;
 }
 
+export enum DocsetProvider {
+  Algolia = 'algolia',
+  MkDocs = 'mkdocs',
+  DevDocs = 'devdocs',
+}
+
 export interface SearchProvider {
   search(docset: Docset, query: string): Promise<SearchResult[]>;
   getKey(): string;

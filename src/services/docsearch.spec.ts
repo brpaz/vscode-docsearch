@@ -1,7 +1,7 @@
 import { DocSearch } from './docsearch';
-import { SearchProvider } from './providers/providers';
-import { AlgoliaProviderConfig, DocsetProvider } from '../models';
+import { DocsetProvider, SearchProvider } from './providers/providers';
 import { Docset } from '../docsets/docset';
+import { AlgoliaProviderConfig } from './providers/algolia';
 
 describe('DocSearch service', () => {
   let docSearch: DocSearch;
@@ -65,7 +65,7 @@ describe('DocSearch service', () => {
     });
 
     it('should throw an error if the docset is not found', async () => {
-      await expect(docSearch.search('docset2', 'query')).rejects.toThrow('Docset docset2 not found');
+      await expect(docSearch.search('docset2', 'query')).rejects.toThrow('Docset with id "docset2" not found');
     });
 
     it('should throw an error if the provider is not found', async () => {

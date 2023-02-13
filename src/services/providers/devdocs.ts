@@ -1,6 +1,5 @@
-import { DevDocsProviderConfig, DocsetProvider } from '../../models';
 import { Docset } from '../../docsets/docset';
-import { SearchProvider, SearchResult } from './providers';
+import { DocsetProvider, SearchProvider, SearchResult } from './providers';
 import { fetchBuilder, FileSystemCache } from 'node-fetch-cache';
 interface Entry {
   name: string;
@@ -10,6 +9,10 @@ interface Entry {
 interface Index {
   entries: Array<Entry>;
   types: Array<Entry>;
+}
+
+export interface DevDocsProviderConfig {
+  slug: string;
 }
 
 export class DevDocsProvider implements SearchProvider {

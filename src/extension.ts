@@ -8,7 +8,7 @@ import { SearchProvider } from './services/providers/providers';
 import { AlgoliaSearchProvider } from './services/providers/algolia';
 import { DocSetsLoader } from './docsets/loader';
 import { MkDocsSearchProvider } from './services/providers/mkdocs';
-import { MapperFactory } from './services/mapper/mapper.factory';
+import MapperFactory from './services/providers/algolia/mapper/factory';
 import { DevDocsProvider } from './services/providers/devdocs';
 import * as path from 'path';
 

@@ -1,6 +1,7 @@
-import { DocsetProvider } from '../models';
+import { DocsetProvider } from '../services/providers/providers';
+import { Docset } from './docset';
 
-const defaultDocsets = [
+const defaultDocsets: Docset[] = [
   {
     id: 'react',
     name: 'React',
@@ -424,8 +425,8 @@ const defaultDocsets = [
     provider: DocsetProvider.Algolia,
     siteUrl: 'https://www.prisma.io/docs',
     searchConfig: {
-      indexName: 'prisma2-docs',
-      apiKey: 'c2c66340c04baad40a878dc3a72fa273',
+      indexName: 'docs-prod',
+      apiKey: 'd8ae0173fc0d9170b085840d0c95f389',
       appId: 'MK4LNFW4EO',
     },
   },
@@ -757,6 +758,32 @@ const defaultDocsets = [
     siteUrl: 'https://copier.readthedocs.io/en/stable',
     searchConfig: {
       indexUrl: 'https://copier.readthedocs.io/en/stable/search/search_index.json',
+    },
+  },
+  {
+    id: 'trpc',
+    name: 'TRPC',
+    siteUrl: 'https://trpc.io',
+    description: 'trpc is a fullstack RPC framework for React and Next.js',
+    provider: DocsetProvider.Algolia,
+    enabled: true,
+    searchConfig: {
+      appId: 'BTGPSR4MOE',
+      indexName: 'trpc',
+      apiKey: 'ed8b3896f8e3e2b421e4c38834b915a8',
+    },
+  },
+  {
+    id: 'nextjs',
+    name: 'Next.js',
+    siteUrl: 'https://nextjs.org/docs',
+    description: 'The React Framework',
+    provider: DocsetProvider.Algolia,
+    enabled: true,
+    searchConfig: {
+      appId: 'NNTAHQI9C5',
+      indexName: 'nextjs_docs',
+      apiKey: '2c5d997944f03fde36ebdbe2f1759ea2',
     },
   },
 ];

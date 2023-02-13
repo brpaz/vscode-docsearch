@@ -1,0 +1,15 @@
+name: Broken Documentaiton
+description: Report broken documentation
+title: "[Broken Doc]: "
+labels: ["broken-doc", "bug"]
+assignees:
+  - brpaz
+body:
+  - type: input
+    id: site
+    attributes:
+      label: Documentation Site
+      description: Input the documentation site that is broken
+      placeholder: react
+    validations:
+      required: true

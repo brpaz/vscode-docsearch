@@ -1,5 +1,5 @@
-import { Docset } from '../../docsets/docset';
-import { SearchResult } from '../providers/providers';
+import { Docset } from '../../../../docsets/docset';
+import { SearchResult } from '../../providers';
 import { ResultMapper } from './mapper';
 
 interface PrismaResult {
@@ -12,7 +12,7 @@ interface PrismaHit {
   path: string;
 }
 
-export class PrismaMapper implements ResultMapper {
+export default class PrismaMapper implements ResultMapper {
   map(docset: Docset, data: unknown): SearchResult[] {
     const result = data as PrismaResult;
 

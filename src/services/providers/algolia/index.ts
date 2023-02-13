@@ -1,10 +1,16 @@
-import { DocsetProvider, AlgoliaProviderConfig } from '../../models';
-import { Docset } from '../../docsets/docset';
-import { SearchProvider, SearchResult } from './providers';
+import { Docset } from '../../../docsets/docset';
+import { DocsetProvider, SearchProvider, SearchResult } from '../providers';
 import fetch, { Response } from 'node-fetch';
-import { MapperFactory } from '../mapper/mapper.factory';
+import MapperFactory from './mapper/factory';
 
 const HITS_PER_PAGE = 10;
+
+export interface AlgoliaProviderConfig {
+  indexName: string;
+  apiKey: string;
+  appId: string;
+  facets?: Array<string>;
+}
 
 /**
  * Class for searching documentation in websites powered by Algolia.
@@ -47,7 +53,7 @@ export class AlgoliaSearchProvider implements SearchProvider {
     });
   }
 
-  private mapResults(docset: Docset, data: any): SearchResult[] {
+  private mapResults(docset: Docset, data: unknown): SearchResult[] {
     const mapper = this.mapperFactory.getMapper(docset.id);
     return mapper.map(docset, data);
   }

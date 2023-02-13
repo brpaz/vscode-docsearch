@@ -1,5 +1,5 @@
-import { Docset } from '../../docsets/docset';
-import { SearchResult } from '../providers/providers';
+import { Docset } from '../../../../docsets/docset';
+import { SearchResult } from '../../providers';
 import { ResultMapper } from './mapper';
 
 interface Result {
@@ -22,7 +22,7 @@ interface Hit {
 
 type Hierarchy = { [key: string]: string };
 
-export class DefaultMapper implements ResultMapper {
+export default class DefaultMapper implements ResultMapper {
   map(docset: Docset, data: unknown): SearchResult[] {
     const result = data as Result;
     return result.hits.map((hit: Hit) => {
