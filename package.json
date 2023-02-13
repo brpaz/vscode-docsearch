@@ -437,6 +437,7 @@
   },
   "scripts": {
     "prepare": "husky install",
+    "vscode:prepublish": "yarn run compile",
     "compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
     "lint:fix": "eslint src --ext ts --fix",
@@ -446,8 +447,8 @@
     "test": "jest",
     "test:report:jest": "serve ./reports/jest",
     "test:report:coverage": "serve ./reports/coverage/lcov-report",
-    "package": "rimraf dist &&mkdir -p dist && vsce package -o dist/",
-    "publish": "vsce publish -i dist/*.vsix",
+    "package": "rimraf dist && mkdir -p dist && vsce package -o dist/",
+    "vsce:publish": "vsce publish -i dist/*.vsix",
     "docs:check": "npx ts-node src/scripts/checkDocs.ts"
   },
   "devDependencies": {

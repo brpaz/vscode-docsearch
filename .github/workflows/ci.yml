@@ -92,7 +92,7 @@ jobs:
           asset_paths: '["./dist/*"]'
 
       - name: Publish to Marketplace
-        run: yarn publish
+        run: yarn vsce:publish
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
 
